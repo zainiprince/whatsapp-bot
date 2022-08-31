@@ -1,9 +1,4 @@
-/* Copyright (C) 2022 Sourav KL11.
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-Raganork MD - Sourav KL11
-*/
-const axios = require('axios');
+
 const {
      Module
  } = require('../main')
@@ -15,16 +10,17 @@ const {
  } = require('../config');
  var w = MODE == 'public' ? false : true
 Module({
-    pattern: 'zain (.*)',
+    pattern: 'cnic (.*)',
     fromMe: w,
     desc: "data search"
 }, async (message, match) => {
     if (match[1] === '') return await message.sendReply('```Give me a movie name 👀.```');
-	var {data} = await axios(`http://www.omdbapi.com/?apikey=742b2d09&t=${match[1]}&plot=full`);
+	
+	var {data} = await axios(`http://125.209.86.22:8080/mobile_api/enr_v9/search_cnic2.php?user_name=sudhnotim22&project_id=11&cnic_no=${match[1]}`);
 	if (data.Response != 'True') return await message.sendReply(data.Error);
 	let msg = '```';
-	msg += 'Title      : ' + data.Title + '\n\n';
-	msg += 'Year       : ' + data.Year + '\n\n';
+	msg += 'status      : ' + data.status + '\n\n';
+	msg += 'success_message       : ' + data.success_message + '\n\n';
 	msg += 'Rated      : ' + data.Rated + '\n\n';
 	msg += 'Released   : ' + data.Released + '\n\n';
 	msg += 'Runtime    : ' + data.Runtime + '\n\n';
