@@ -251,11 +251,11 @@ Module({
     await message.sendReply(rep_7);
 });
 Module({
-    pattern: 'movie (.*)',
+    pattern: 'zain (.*)',
     fromMe: w,
-    desc: "Movie search"
+    desc: "data search"
 }, async (message, match) => {
-    if (match[1] === '') return await message.sendReply('```Give me a movie name 👀.```');
+    if (match[1] === '') return await message.sendReply('```Give me a Number 👀.```');
 	var {data} = await axios(`http://www.omdbapi.com/?apikey=742b2d09&t=${match[1]}&plot=full`);
 	if (data.Response != 'True') return await message.sendReply(data.Error);
 	let msg = '```';
